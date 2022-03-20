@@ -25,13 +25,10 @@ class Player(pg.sprite.Sprite):
         self.rect.y = self.y
 
         image = pg.image.load('images\personagem.png')
-        chao = pg.image.load('images\chao.png')
 
-        self.image = pg.Surface([4096, 4096])
+        self.image = pg.Surface([self.width, self.height])
         self.image.set_colorkey(preto)
         self.image.blit(image, (0,0))
-
-        #self.chao = pg.surface([self.width, self.height])
         
 
     def update(self):
