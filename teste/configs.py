@@ -4,7 +4,7 @@ altura = 800
 FPS = 70 
 
 player_layer = 1
-speed = 2
+speed = 5
 
 tile_size = 64
 

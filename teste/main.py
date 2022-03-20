@@ -18,7 +18,6 @@ class Game:
         self.blocks = pg.sprite.LayeredUpdates()
         self.enemies = pg.sprite.LayeredUpdates()
         self.attacks = pg.sprite.LayeredUpdates()
-
         self.player = Player(self, 1, 2)
 
     def eventos(self):
@@ -34,7 +33,7 @@ class Game:
         pg.display.update()
 
     def draw(self):
-        self.background.fill(branco)
+        self.background.blit(pg.image.load("images\chao.png"),(0,0) )
 
     def main(self):
         while self.sair:
