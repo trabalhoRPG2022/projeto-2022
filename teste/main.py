@@ -10,7 +10,7 @@ class Game:
         self.background = pg.display.set_mode((largura, altura))
         self.clock = pg.time.Clock()
         self.rodando = True
-
+        
     def new(self):
         self.sair = True
 
@@ -33,13 +33,15 @@ class Game:
         pg.display.update()
 
     def draw(self):
-        self.background.blit(pg.image.load("images\chao.png"),(0,0) )
+        fundo = pg.image.load("img/chao2.png")
+        self.background.blit(fundo,(0,0) )
 
     def main(self):
         while self.sair:
             self.eventos()
             self.atualizacoes()
             self.draw()
+            self.player.run()
         self.rodando = False
 
 game = Game()
