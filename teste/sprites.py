@@ -11,8 +11,8 @@ class Player(pg.sprite.Sprite):
 
         self.x = x * tile_size
         self.y = y * tile_size
-        self.width = tile_size
-        self.height = tile_size
+        self.width = 44
+        self.height = 61
 
         self.x_change = 0
         self.y_change = 0
@@ -24,10 +24,10 @@ class Player(pg.sprite.Sprite):
         self.rect.x = self.x
         self.rect.y = self.y
 
-        image = pg.image.load('images\personagem.png')
+        image = pg.image.load('img\personagemprincipal.png')
 
         self.image = pg.Surface([self.width, self.height])
-        self.image.set_colorkey(preto)
+        self.image.set_colorkey(verde)
         self.image.blit(image, (0,0))
         
 

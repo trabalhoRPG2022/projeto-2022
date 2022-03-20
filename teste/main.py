@@ -30,10 +30,10 @@ class Game:
         self.all_sprites.update()
         self.all_sprites.draw(self.background)
         self.clock.tick(FPS)
-        pg.display.update()
+        pg.display.update(0,0,1000,800)
 
     def draw(self):
-        self.background.blit(pg.image.load("images\chao.png"),(0,0) )
+        self.background.blit(pg.image.load('img\chaoquadriculado.png'), (0,0))
 
     def main(self):
         while self.sair:
