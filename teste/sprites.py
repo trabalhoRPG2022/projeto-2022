@@ -1,6 +1,30 @@
+from re import S
+from tkinter import W, Widget
 import pygame as pg
+import math
+import random
 from configs import *
-from arvore import Arvore
+
+
+class Sprite_sheet:
+    def __init__(self, file) -> None:
+        self.sheet = pg.image.load(file).convert()
+    
+    def get_sprite(self, x, y, width, height):
+        sprite = pg.Surface([width, height])
+        sprite.blit(self.sheet, (0,0), (x, y, width, height))
+        sprite.set_colorkey(branco)
+        return sprite
+
+class Sprite_sheet2:
+    def __init__(self, file) -> None:
+        self.sheet = pg.image.load(file).convert()
+    
+    def get_sprite(self, x, y, width, height):
+        sprite = pg.Surface([width, height])
+        sprite.blit(self.sheet, (0,0), (x, y, width, height))
+        sprite.set_colorkey(preto)
+        return sprite
 
 
 class Player(pg.sprite.Sprite):
@@ -13,16 +37,16 @@ class Player(pg.sprite.Sprite):
         self.obstaculos_visiveis = pg.sprite.Group()
         self.obstaculos = pg.sprite.Group()
         pg.sprite.Sprite.__init__(self, self.groups)
-        self.criar_mapa()
 
 
         self.x = x * tile_size
         self.y = y * tile_size
-        self.width = tile_size
-        self.height = tile_size
+        self.width = 44
+        self.height = 61
 
         self.x_change = 0
         self.y_change = 0
+
 
         self.image = pg.Surface([self.width, self.height])
         self.image.fill(vermeho)
@@ -31,12 +55,9 @@ class Player(pg.sprite.Sprite):
         self.rect.x = self.x
         self.rect.y = self.y
         
-
-        image = pg.image.load('img/personagem.png')
         
-        self.image = pg.Surface([self.width, self.height])
-        self.image.set_colorkey(preto)
-        self.image.blit(image, (0,0))
+        self.image = self.game.character_spritesheet.get_sprite(152, 9, self.width, self.width)
+
         
 
     def update(self):
@@ -51,25 +72,65 @@ class Player(pg.sprite.Sprite):
     def movement(self):
         keys = pg.key.get_pressed()
         if keys[pg.K_a]:
+            for sprite in self.game.all_sprites:
+                sprite.rect.x +=  speed
             self.x_change -= speed
+            self.facing = 'right'
 
-        if keys[pg.K_d]: 
+        if keys[pg.K_d]:
+            for sprite in self.game.all_sprites:
+                sprite.rect.x -=  speed
             self.x_change += speed    
     
-        if keys[pg.K_w]:    
+        if keys[pg.K_w]:
+            for sprite in self.game.all_sprites:
+                sprite.rect.y +=  speed 
             self.y_change -= speed 
 
-        if keys[pg.K_s]: 
+        if keys[pg.K_s]:
+            for sprite in self.game.all_sprites:
+                sprite.rect.y -=  speed
             self.y_change += speed
-        
-    def criar_mapa(self):
-        for obs_index,obs in enumerate(MAPA_MUNDO):
-            for coluna_index, coluna in enumerate(obs):
-                x =  coluna_index * tile_size
-                y =  obs_index * tile_size
-                if coluna == 'x':
-                    Arvore((x,y), [self.obstaculos_visiveis])
                     
     
     def run(self):
         self.obstaculos_visiveis.draw(self.mostrar_chao)
+
+class Arvore(pg.sprite.Sprite):
+
+    def __init__(self, game, x, y):
+        self.game = game
+        self._layer = block_layer
+        self.groups = self.game.all_sprites, self.game.blocks
+        pg.sprite.Sprite.__init__(self, self.groups)
+
+        self.x = x * tile_size
+        self.y = y * tile_size
+        self.width = tile_size
+        self.height = tile_size
+
+        self.image = self.game.terreno_spritesheet.get_sprite(285, 872, self.width, self.height)
+
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
+
+
+class Fundo(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.game = game
+        self._layer = fundo_layer
+        self.groups = self.game.all_sprites
+        pg.sprite.Sprite.__init__(self, self.groups)
+
+        self.x = x * tile_size
+        self.y = y * tile_size
+        self.width = tile_size
+        self.height = tile_size
+
+        self.image  = self.game.terreno_spritesheet.get_sprite(165, 324 , self.width, self.height)
+
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
+
