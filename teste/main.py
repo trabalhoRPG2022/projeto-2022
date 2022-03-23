@@ -21,6 +21,13 @@ class Game:
                 Fundo(self, j, i)
                 if column == 'x':
                     Arvore(self, j, i)
+                if column == 'V':
+                    Void(self, j, i)
+                if column == 'C':
+                    Casa_chao(self, j, i)
+                if column == 'CM':
+                    Casa_chao(self, j, i)
+                    monitor(self, j, i)
 
         
     def new(self):

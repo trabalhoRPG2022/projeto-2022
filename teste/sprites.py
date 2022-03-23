@@ -134,3 +134,58 @@ class Fundo(pg.sprite.Sprite):
         self.rect.x = self.x
         self.rect.y = self.y
 
+
+class Void(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.game = game
+        self._layer = fundo_layer
+        self.groups = self.game.all_sprites
+        pg.sprite.Sprite.__init__(self, self.groups)
+
+        self.x = x * tile_size
+        self.y = y * tile_size
+        self.width = tile_size
+        self.height = tile_size
+
+        self.image  = self.game.terreno_spritesheet.get_sprite(495, 925 , self.width, self.height)
+
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
+
+class Casa_chao(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.game = game
+        self._layer = fundo_layer
+        self.groups = self.game.all_sprites
+        pg.sprite.Sprite.__init__(self, self.groups)
+
+        self.x = x * tile_size
+        self.y = y * tile_size
+        self.width = tile_size
+        self.height = tile_size
+
+        self.image  = self.game.terreno_spritesheet.get_sprite(367, 759 , self.width, self.height)
+
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
+
+
+class monitor(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.game = game
+        self._layer = block_layer
+        self.groups = self.game.all_sprites
+        pg.sprite.Sprite.__init__(self, self.groups)
+
+        self.x = x * tile_size
+        self.y = y * tile_size
+        self.width = tile_size
+        self.height = tile_size
+
+        self.image  = self.game.terreno_spritesheet.get_sprite(297, 1088 , self.width, self.height)
+
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
