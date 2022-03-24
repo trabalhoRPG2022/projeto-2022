@@ -64,7 +64,9 @@ class Player(pg.sprite.Sprite):
         self.movement()
 
         self.rect.x += self.x_change
+        self.colisao('x')
         self.rect.y += self.y_change
+        self.colisao('y')
 
         self.x_change = 0
         self.y_change = 0
@@ -91,10 +93,32 @@ class Player(pg.sprite.Sprite):
             for sprite in self.game.all_sprites:
                 sprite.rect.y -=  speed
             self.y_change += speed
+
+    def colisao(self, direcao):
+        if direcao == 'x':
+            hits = pg.sprite.spritecollide(self, self.game.blocks, False)
+            if hits:
+                if self.x_change > 0:
+                    self.rect.x = hits[0].rect.left - self.rect.width
+                    for sprite in self.game.all_sprites:
+                        sprite.rect.x += speed
+                if self.x_change < 0:
+                    self.rect.x = hits[0].rect.right
+                    for sprite in self.game.all_sprites:
+                        sprite.rect.x -= speed
+        if direcao == 'y':
+            hits = pg.sprite.spritecollide(self, self.game.blocks, False)
+            if hits:
+                if self.y_change > 0:
+                    self.rect.y = hits[0].rect.top - self.rect.height
+                    for sprite in self.game.all_sprites:
+                        sprite.rect.y += speed
+                if self.y_change < 0:
+                    self.rect.y = hits[0].rect.bottom
+                    for sprite in self.game.all_sprites:
+                        sprite.rect.y -= speed
+            
                     
-    
-    def run(self):
-        self.obstaculos_visiveis.draw(self.mostrar_chao)
 
 class Arvore(pg.sprite.Sprite):
 
@@ -172,7 +196,25 @@ class Casa_chao(pg.sprite.Sprite):
         self.rect.y = self.y
 
 
-class monitor(pg.sprite.Sprite):
+class Monitor(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.game = game
+        self._layer = block_layer
+        self.groups = self.game.all_sprites, self.game.blocks
+        pg.sprite.Sprite.__init__(self, self.groups)
+
+        self.x = x * tile_size
+        self.y = y * tile_size
+        self.width = tile_size
+        self.height = tile_size
+
+        self.image  = self.game.terreno_spritesheet.get_sprite(297, 1088 , self.width, self.height)
+
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
+
+class Mesa_do_monitor(pg.sprite.Sprite):
     def __init__(self, game, x, y):
         self.game = game
         self._layer = block_layer
@@ -184,7 +226,26 @@ class monitor(pg.sprite.Sprite):
         self.width = tile_size
         self.height = tile_size
 
-        self.image  = self.game.terreno_spritesheet.get_sprite(297, 1088 , self.width, self.height)
+        self.image  = self.game.terreno_spritesheet.get_sprite(358, 1095 , self.width, self.height)
+
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
+
+
+class Armario(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.game = game
+        self._layer = block_layer
+        self.groups = self.game.all_sprites, self.game.blocks
+        pg.sprite.Sprite.__init__(self, self.groups)
+
+        self.x = x * tile_size
+        self.y = y * tile_size
+        self.width = tile_size
+        self.height = tile_size
+
+        self.image  = self.game.terreno_spritesheet.get_sprite(395, 1214 , self.width, self.height)
 
         self.rect = self.image.get_rect()
         self.rect.x = self.x

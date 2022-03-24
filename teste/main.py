@@ -27,7 +27,13 @@ class Game:
                     Casa_chao(self, j, i)
                 if column == 'CM':
                     Casa_chao(self, j, i)
-                    monitor(self, j, i)
+                    Mesa_do_monitor(self, j, i)
+                    Monitor(self, j, i)
+                if column == "P":
+                    Player(self, j, i)
+                if column == "A":
+                    Casa_chao(self, j, i)
+                    Armario(self, j, i)
 
         
     def new(self):
@@ -37,7 +43,6 @@ class Game:
         self.blocks = pg.sprite.LayeredUpdates()
         self.enemies = pg.sprite.LayeredUpdates()
         self.attacks = pg.sprite.LayeredUpdates()
-        self.player = Player(self, 7, 6)
         self.criar_mapa()
 
     def eventos(self):
@@ -59,7 +64,6 @@ class Game:
         while self.sair:
             self.eventos()
             self.atualizacoes()
-            self.player.run()
         self.rodando = False
 
 game = Game()
