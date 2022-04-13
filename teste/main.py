@@ -32,8 +32,11 @@ class Game:
                 if column == "P":
                     Player(self, j, i)
                 if column == "A":
-                    Casa_chao(self, j, i)
+                    Casa_chao(self, j,i)
                     Armario(self, j, i)
+                if column == "G":
+                    Gol_bolinha(self, j, i)
+                    
 
         
     def new(self):

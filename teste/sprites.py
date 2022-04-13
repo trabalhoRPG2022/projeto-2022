@@ -1,9 +1,6 @@
-from re import S
-from tkinter import W, Widget
 import pygame as pg
-import math
-import random
 from configs import *
+
 
 
 class Sprite_sheet:
@@ -41,8 +38,8 @@ class Player(pg.sprite.Sprite):
 
         self.x = x * tile_size
         self.y = y * tile_size
-        self.width = 44
-        self.height = 61
+        self.width = 32
+        self.height = 44
 
         self.x_change = 0
         self.y_change = 0
@@ -56,8 +53,8 @@ class Player(pg.sprite.Sprite):
         self.rect.y = self.y
         
         
-        self.image = self.game.character_spritesheet.get_sprite(152, 9, self.width, self.width)
-
+        self.image = self.game.character_spritesheet.get_sprite(157, 10, self.width, self.height)
+        
         
 
     def update(self):
@@ -117,9 +114,7 @@ class Player(pg.sprite.Sprite):
                     self.rect.y = hits[0].rect.bottom
                     for sprite in self.game.all_sprites:
                         sprite.rect.y -= speed
-            
-                    
-
+  
 class Arvore(pg.sprite.Sprite):
 
     def __init__(self, game, x, y):
@@ -130,10 +125,10 @@ class Arvore(pg.sprite.Sprite):
 
         self.x = x * tile_size
         self.y = y * tile_size
-        self.width = tile_size
-        self.height = tile_size
+        self.width = 47 
+        self.height = 47
 
-        self.image = self.game.terreno_spritesheet.get_sprite(285, 872, self.width, self.height)
+        self.image = self.game.terreno_spritesheet.get_sprite(289, 874, self.width, self.height)
 
         self.rect = self.image.get_rect()
         self.rect.x = self.x
@@ -180,7 +175,7 @@ class Void(pg.sprite.Sprite):
 class Casa_chao(pg.sprite.Sprite):
     def __init__(self, game, x, y):
         self.game = game
-        self._layer = fundo_layer
+        self._layer = fundo_layer2
         self.groups = self.game.all_sprites
         pg.sprite.Sprite.__init__(self, self.groups)
 
@@ -188,13 +183,11 @@ class Casa_chao(pg.sprite.Sprite):
         self.y = y * tile_size
         self.width = tile_size
         self.height = tile_size
-
         self.image  = self.game.terreno_spritesheet.get_sprite(367, 759 , self.width, self.height)
 
         self.rect = self.image.get_rect()
         self.rect.x = self.x
-        self.rect.y = self.y
-
+        
 
 class Monitor(pg.sprite.Sprite):
     def __init__(self, game, x, y):
@@ -246,6 +239,24 @@ class Armario(pg.sprite.Sprite):
         self.height = tile_size
 
         self.image  = self.game.terreno_spritesheet.get_sprite(395, 1214 , self.width, self.height)
+
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
+
+class Gol_bolinha(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.game = game
+        self._layer = block_layer
+        self.groups = self.game.all_sprites, self.game.blocks
+        pg.sprite.Sprite.__init__(self, self.groups)
+
+        self.x = x * tile_size
+        self.y = y * tile_size
+        self.width = 133
+        self.height = 55
+
+        self.image  = self.game.terreno_spritesheet.get_sprite(676, 284 , self.width, self.height)
 
         self.rect = self.image.get_rect()
         self.rect.x = self.x
