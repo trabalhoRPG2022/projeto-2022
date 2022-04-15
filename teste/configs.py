@@ -7,7 +7,7 @@ embblock_layer = 2
 fundo_layer = 1
 fundo_layer2 = 2
 void_layer = 5
-speed = 50
+speed = 15
 tile_size = 64
 MAPA_MUNDO = [
 ['V','V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V','V','V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V'],
