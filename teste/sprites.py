@@ -115,13 +115,25 @@ class Player(pg.sprite.Sprite):
                     for sprite in self.game.all_sprites:
                         sprite.rect.y -= speed
   
-class Arvore(pg.sprite.Sprite):
+class Heranca_chao(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.game = game
+        self._layer = fundo_layer
+        self.groups = self.game.all_sprites
+        pg.sprite.Sprite.__init__(self, self.groups)
 
+class Heranca_block(pg.sprite.Sprite):
     def __init__(self, game, x, y):
         self.game = game
         self._layer = block_layer
         self.groups = self.game.all_sprites, self.game.blocks
         pg.sprite.Sprite.__init__(self, self.groups)
+        
+
+class Arvore(Heranca_block):
+
+    def __init__(self, game, x, y):
+        super().__init__(game, x, y)
 
         self.x = x * tile_size
         self.y = y * tile_size
@@ -135,12 +147,9 @@ class Arvore(pg.sprite.Sprite):
         self.rect.y = self.y
 
 
-class Fundo(pg.sprite.Sprite):
+class Fundo(Heranca_chao):
     def __init__(self, game, x, y):
-        self.game = game
-        self._layer = fundo_layer
-        self.groups = self.game.all_sprites
-        pg.sprite.Sprite.__init__(self, self.groups)
+        super().__init__(game, x, y)
 
         self.x = x * tile_size
         self.y = y * tile_size
@@ -172,12 +181,9 @@ class Void(pg.sprite.Sprite):
         self.rect.x = self.x
         self.rect.y = self.y
 
-class Casa_chao(pg.sprite.Sprite):
+class Casa_chao(Heranca_chao):
     def __init__(self, game, x, y):
-        self.game = game
-        self._layer = fundo_layer2
-        self.groups = self.game.all_sprites
-        pg.sprite.Sprite.__init__(self, self.groups)
+        super().__init__(game, x, y)
 
         self.x = x * tile_size
         self.y = y * tile_size
@@ -187,14 +193,11 @@ class Casa_chao(pg.sprite.Sprite):
 
         self.rect = self.image.get_rect()
         self.rect.x = self.x
-        
+        self.rect.y = self.y
 
-class Monitor(pg.sprite.Sprite):
+class Monitor(Heranca_block):
     def __init__(self, game, x, y):
-        self.game = game
-        self._layer = block_layer
-        self.groups = self.game.all_sprites, self.game.blocks
-        pg.sprite.Sprite.__init__(self, self.groups)
+        super().__init__(game, x, y)
 
         self.x = x * tile_size
         self.y = y * tile_size
@@ -207,12 +210,9 @@ class Monitor(pg.sprite.Sprite):
         self.rect.x = self.x
         self.rect.y = self.y
 
-class Mesa_do_monitor(pg.sprite.Sprite):
+class Mesa_do_monitor(Heranca_block):
     def __init__(self, game, x, y):
-        self.game = game
-        self._layer = block_layer
-        self.groups = self.game.all_sprites
-        pg.sprite.Sprite.__init__(self, self.groups)
+        super().__init__(game, x, y)
 
         self.x = x * tile_size
         self.y = y * tile_size
@@ -226,12 +226,9 @@ class Mesa_do_monitor(pg.sprite.Sprite):
         self.rect.y = self.y
 
 
-class Armario(pg.sprite.Sprite):
+class Armario(Heranca_block):
     def __init__(self, game, x, y):
-        self.game = game
-        self._layer = block_layer
-        self.groups = self.game.all_sprites, self.game.blocks
-        pg.sprite.Sprite.__init__(self, self.groups)
+        super().__init__(game, x, y)
 
         self.x = x * tile_size
         self.y = y * tile_size
@@ -244,12 +241,9 @@ class Armario(pg.sprite.Sprite):
         self.rect.x = self.x
         self.rect.y = self.y
 
-class Gol_bolinha(pg.sprite.Sprite):
+class Gol_bolinha(Heranca_block):
     def __init__(self, game, x, y):
-        self.game = game
-        self._layer = block_layer
-        self.groups = self.game.all_sprites, self.game.blocks
-        pg.sprite.Sprite.__init__(self, self.groups)
+        super().__init__(game, x, y)
 
         self.x = x * tile_size
         self.y = y * tile_size
